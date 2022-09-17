@@ -10,23 +10,22 @@ Mirotron automates the process of deploying static websites to AWS.
  - Configure a Content Delivery Network and SSL with AWS CloudFront
  """
 
-from email.policy import default
 import boto3
 import click
 from  bucket import BucketManager
 
 
 session = None
-bucket_manager = None 
+bucket_manager = None
 
 @click.group()
-@click.option('--profile', default = None)
+@click.option('--profile', default = None, help = "Use your AWS profile")
 def cli(profile):
     """Webotron deploys websites to AWS."""
     global session, bucket_manager
     session_config = {}
     if profile:
-        session_config['profile_name'] = profile 
+        session_config['profile_name'] = profile
     session = boto3.Session(**session_config)
     bucket_manager = BucketManager(session)
 
@@ -63,6 +62,7 @@ def setup_bucket(bucket):
 def sync(pathname, bucket):
     "Sync contents of PATHNAME to BUCKET"
     bucket_manager.sync(pathname, bucket)
+    print(bucket_manager.get_bucket_url(bucket_manager.s3.Bucket(bucket)))
 
 
 if __name__ == '__main__':
