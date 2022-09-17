@@ -9,5 +9,6 @@ Mirotron currently has the following features:
 - All objects in a specified S3 bucket can be listed
 - An operation to Create an new bucket that has a PublicReadGetObject policy to enable website hosting
 - Sync directory to s3
+- Set a specific AWS profile to use by typing --profile=<profilename>
 
 
