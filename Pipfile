@@ -9,6 +9,7 @@ click = "*"
 
 [dev-packages]
 ipython = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.9"
