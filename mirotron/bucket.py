@@ -143,6 +143,7 @@ class BucketManager:
 
         etag = self.gen_etag(path)
         if self.manifest.get(key, '') == etag:
+            print(f'no changes detected in {key}')
             return
 
         return bucket.upload_file(
