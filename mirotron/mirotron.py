@@ -14,10 +14,8 @@ import boto3
 import click
 from  bucket import BucketManager
 
-
 session = None
 bucket_manager = None
-
 @click.group()
 @click.option('--profile', default = None, help = "Use your AWS profile")
 def cli(profile):
@@ -28,8 +26,6 @@ def cli(profile):
         session_config['profile_name'] = profile
     session = boto3.Session(**session_config)
     bucket_manager = BucketManager(session)
-
-
 
 
 @cli.command('list-buckets')
