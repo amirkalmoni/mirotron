@@ -58,7 +58,11 @@ def list_bucket_objects(bucket):
 @cli.command('setup-bucket')
 @click.argument('bucket')
 def setup_bucket(bucket):
-    """Create and configure S3 bucket."""
+    """Create and configure S3 bucket.
+        If the custom domain feature is used,
+        make sure that the name follows the convention,
+        <bucketname>.hostedzoneURL 
+    """
     s3_bucket = bucket_manager.init_bucket(bucket)
     bucket_manager.set_policy(s3_bucket)
     bucket_manager.configure_website(s3_bucket)
@@ -78,7 +82,9 @@ def sync(pathname, bucket):
 @cli.command('setup-domain')
 @click.argument('domain')
 def setup_domain(domain):
-    """Configure DOMAIN to point to BUCKET."""
+    """Configure DOMAIN to point to BUCKET. /
+        the domain domain name must be equal to the bucket name
+    """
     bucket = bucket_manager.get_bucket(domain)
 
     zone = domain_manager.find_hosted_zone(domain) \
